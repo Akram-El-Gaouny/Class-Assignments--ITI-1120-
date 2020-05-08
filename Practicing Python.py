@@ -369,4 +369,223 @@ def min_CAD_coins(price, payment):
     change = change - (d*10)
     n = change//5
     return(t,l,q,d,n)
+
+##################################################
+###############Part 2 - Question 1################
+##################################################
+
+
+def min_enclosing_rectangle(radius, x, y):
+    '''
+    (float,float,float) -> (float,float) or (None)
+    This function provides The coordinates of the bottom left corner of a rectangle that encloses a circle with a centre coordinate of (x,y) and a given radius
+    '''
+    if radius < 0:
+        return None
+    else:
+        X = x-radius
+        Y= y - radius
+        return (X,Y)
+
+##################################################
+###############Part 2 - Question 2################
+##################################################
+def series_sum():
+    '''
+    ()-> (float) or (None)
+    finds the sum of series starting with a 1000 and increases by increments of (1/n^2) where n is a number that ranges between 1 and the input digit
+    '''
+    n = int(input("Please Enter a non-negative integer: "))
+    if (n<0):
+        return None
+    else:
+        sum_of_series = 1000
+
+        for x in range (1,n):
+            sum_of_series = sum_of_series + (1/(x)**2)
+        return sum_of_series
+##################################################
+###############Part 2 - Question 3################
+##################################################
+
+def pell(n):
+    '''
+    (int)-> (int) or (None)
+    This function return the nth - given through paramater n- pell number
+    '''
+    if (n<0):
+        return None
+    elif(n==0):
+        return 0
+    elif (n==1):
+        return 1
+    else:
+        n_added = 0
+        n_squared =1
+        value=2
+        for x in range(1,n):
+            value = (n_squared)*2 + n_added
+            n_added = n_squared
+            n_squared = value
+        return value
+##################################################
+###############Part 2 - Question 4################
+##################################################
+def countMembers(s):
+    '''
+    (str) -> (int)
+    This function takes a string input and returns the number of ocuurences of the character in 'efghijFIJKLMNOPQRSTUVWX23456!,\\' in the given string parametr (s)
+    '''
+    counter = 0
+    for x in s:
+        if  x in 'efghijFIJKLMNOPQRSTUVWX23456!,\\':
+            counter+=1
+
+    return counter
+
+##################################################
+###############Part 2 - Question 5################
+##################################################
+
+def casual_number(s):
+    '''
+    (str)-> (int) or (None)
+    The function takes a string and picks out the numbers in a sequence that mathematically represent an actual value 
+    '''
+    number=''
+    counter_neg=0
+    counter_str=0
+    for x in s:
+
+        if x.lower() in 'abcdefghijklmnopqrstuv':
+            counter_str+=1
+        elif x in "-":
+            counter_neg+=1
+            number = number + x
+        elif x in "1234567890-":
+            number = number + x
+       
+                 
+
+    if (counter_neg>=2)or number==''or number=="-" or counter_str>0 :
+        return None
+    else:
+        return int(number)
+##################################################
+###############Part 2 - Question 6################
+##################################################
+def alienNumbers(s):
+    '''
+    (str)-> (int)
+     Calculates the sum of a string given values to specific characters
+    '''
+    
+    sumT = (s.count('T')*1024)+ (s.count('y')*598)+ (s.count('!')*121)+ (s.count('a')*42)+(s.count('N')*6) +s.count('U')       
+    return sumT
+
+
+##################################################
+###############Part 2 - Question 7################
+##################################################
+def alienNumbersAgain(s):
+    '''
+    (str)-> (int)
+     Calculates the sum of a string given values to specific characters
+    '''
+
+    sumT =0
+    for x in s:
+        
+        if x =="T":
+            sumT= sumT + 1024
+        elif x=="y":
+            sumT= sumT + 598
+        elif x=="!":
+            sumT= sumT + 121
+        elif x == "a":
+            sumT= sumT + 42
+        elif x=="N":
+            sumT= sumT + 6
+        elif x=="U":
+            sumT= sumT + 1
+    return sumT
+    
+##################################################
+###############Part 2 - Question 8################
+##################################################
+def encrypt(s):
+    '''
+    (str) -> (str)
+    The function encrypts the given string s and returns a new encrypted string. It reverses it and changes positions of characters.
+    '''
+    n_s = s[::-1]
+    loop_var =0
+    extra_letter=''
+    if (len(n_s)%2==1):
+        loop_var = int((len(n_s)-1)/2)
+        extra_letter = n_s[-loop_var-1]
+    else:
+        loop_var = int(len(n_s)/2)
+    
+    
+    encrypted_s =''
+
+    for x in range(1,loop_var+1):
+        encrypted_s =  encrypted_s + n_s[x-1] + n_s[-x]
+    encrypted_s= encrypted_s + extra_letter
+    return encrypted_s
+
+##################################################
+###############Part 2 - Question 9################
+##################################################
+def oPify(s):
+    '''
+    (str)->(str)
+    This function place the sub string op alphabatic characters. the string op is formatted based on the capitalization of the preceding and following alphabatic character
+    '''
+
+    output =''
+    if len(s) == 1:
+        return s
+    for x in range (0,len(s)):
+        output= output+s[x]
+        if s[x] not in "0123456789" and x<len(s)-1 and s[x+1] not in '0123456789':
+
+
+            if(s[x].isupper() and s[x+1].isupper()):
+                output = output+ "op".upper()
+            elif(s[x+1].islower() and s[x].islower()):
+                output = output+ "op".lower()
+            elif(s[x].islower() and s[x+1].isupper()):
+                output = output+ "oP"
+            elif(s[x+1].islower() and s[x].isupper()):
+                output = output+ "Op"
+            
+                
+    return output
+
+##################################################
+###############Part 2 - Question 10###############
+##################################################
+def nonrepetitive(s):
+    '''
+    (str) -> (bool)
+    This fundtion takes a string input (s) and returns True if the string is nonrepertive or false otherwise
+    
+    '''
+    word =''
+    for x in range (math.floor(len(s)/2),0,-1):
+        for y in range (0, len(s)):
+            if (word=='' and len(s)+1>(2*x)+y and s[y:x+y] == s[x+y:2*x+y]):
+                word = s[y:x+y]
+    return word == ''
+    
+                
+                
+            
+           
+            
+            
+   
+
     
